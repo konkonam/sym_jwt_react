@@ -2,22 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+
+use App\Repository\ProductRepository;
 
 class ProductsController extends AbstractController
 {
     /**
      * @Route("/api/products", name="products")
      */
-    public function products(SerializerInterface $serializer): Response
+    public function products(ProductRepository $productsRepository, SerializerInterface $serializer): Response
     {
-        $products = $this->getDoctrine()
-            ->getRepository(Product::class)
-            ->findAll();
+        $products = $productsRepository->findAll();
 
         if (!$products)
         {
@@ -36,11 +35,9 @@ class ProductsController extends AbstractController
     /**
      * @Route("/api/product/{id}", name="product")
      */
-    public function product(int $id, SerializerInterface $serializer): Response
+    public function product(int $id, ProductRepository $productsRepository, SerializerInterface $serializer): Response
     {
-        $product = $this->getDoctrine()
-            ->getRepository(Product::class)
-            ->find($id);
+        $product = $productsRepository->find($id);
 
         if ($product)
         {

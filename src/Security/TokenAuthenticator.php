@@ -83,7 +83,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
         $data = [
-            'message' => 'Authentication Required'
+            'message' => 'Please provide a valid jwt token'
         ];
 
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
