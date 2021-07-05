@@ -6,7 +6,7 @@ Frontend with React in Typescript
 ## Prerequisite
 - PHP (developed using version 8.0.7)
 - Composer
-- symfony CLI ([download here]: https://symfony.com/download)
+- symfony - https://symfony.com/download
 - yarn
 
 ## Installation
