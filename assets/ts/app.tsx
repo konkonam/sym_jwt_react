@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import ReactDOM from 'react-dom';
 
-import AuthService from './services/authService';
+import AuthService from './services/auth.service';
 
 import Count from './components/count.component';
 

@@ -50,12 +50,12 @@ class SecurityController extends AbstractController
              'token' => $jwt,
          ]);
     }
-}
 
-/**
- * curl -L -X POST 'http://localhost:8888/public/auth/login?email=test@test.com&password=testpass'
- * 
- * Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTYyNTQwNTkxMX0.u4ZszK4ErPIvmmzAnaItpkTo1ccarkWUMRnj9FR3cPQ
- * 
- * curl -L -X GET 'http://localhost:8888/public/api/products' -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTYyNTQwNTkxMX0.u4ZszK4ErPIvmmzAnaItpkTo1ccarkWUMRnj9FR3cPQ'
- */
+    /**
+     * @Route("/auth/refresh", name="refresh", methods={"POST"})
+     */
+    public function refresh(Request $request, UserRepository $userRepository): Response
+    {
+
+    }
+}
