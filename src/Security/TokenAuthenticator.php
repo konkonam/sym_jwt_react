@@ -55,7 +55,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         }
         catch (\Exception $exception)
         {
-                throw new AuthenticationException($exception->getMessage());
+            throw new AuthenticationException($exception->getMessage());
         }
     }
 
