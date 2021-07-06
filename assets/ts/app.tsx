@@ -1,18 +1,20 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import AuthService from './services/auth.service';
 
 import Count from './components/count.component';
+import LoginForm from './components/login.component';
+import ProductsList from './components/products.component';
 
 const App: FunctionComponent = () => {
-    const user = AuthService.getCurrentUser();
+    //AuthService.logout();
+
 
     return (
         <div>
-            <p>hello from App</p>
-            <p>{user.token}</p>
-            <Count />
+
+            <ProductsList />
         </div>
     );
 }

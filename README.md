@@ -1,9 +1,9 @@
 # SYMFONY-JWT-REACT
 
-Symfony backend with JWT-Authentication
+Symfony backend with JWT-Authentication\
 Frontend with React in Typescript
 
-## Prerequisite
+## Prerequisities
 - PHP (developed using version 8.0.7)
 - Composer
 - symfony - https://symfony.com/download
