@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PageHeader, Button } from 'antd';
-import {CodeOutlined} from '@ant-design/icons';
 import AuthService from '../services/auth.service';
 
 const AccountControls = () => {
@@ -33,9 +32,9 @@ const Header = () => {
     return (
             <PageHeader
                 className='site-page-header'
-                subTitle='a symfony-react-app'
+                subTitle='a minimalistic store'
                 ghost={false}
-                title='SYMREACT'
+                title='Demostore'
                 extra={[
                     <AccountControls />,
                     <Button>

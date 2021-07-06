@@ -10,10 +10,6 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
     const history = useHistory();
 
-    useEffect(() => {
-
-    })
-
     const handleUsername = (event: any) => {
         setUsername(event.target.value);
     }
