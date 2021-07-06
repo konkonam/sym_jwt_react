@@ -12,7 +12,8 @@ class AuthService {
             .then(response => {
                 if(response.data.token) {
                     localStorage.setItem('user', JSON.stringify(response.data));
-                }
+                    window.location.href = '/products'
+                }   
 
                 return response.data;
             })
@@ -20,6 +21,8 @@ class AuthService {
 
     logout() {
         localStorage.removeItem('user');
+        document.cookie = 'PHPSESSID =; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        window.location.reload();
     }
 
     getCurrentUser() {

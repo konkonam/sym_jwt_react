@@ -18,6 +18,7 @@ security:
             security: false
         main:
             pattern: ^/api
+            stateless: true
             guard:
                 authenticators:
                     - App\Security\TokenAuthenticator

@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
-
+import { useHistory } from 'react-router-dom';
 import ApiService from '../services/api.service';
+
+import { Row, Col, Card, message, Spin } from 'antd';
+import ErrorList from 'antd/lib/form/ErrorList';
+
+
 
 const Product = (props: any) => {
     return (
-        <li>
-            id: {props.id}<br/>
-            name: {props.name}<br/>
-            description: {props.description}<br/>
-            price: {props.price}
-        </li>
+        <Col xs={12} sm={12} md={6} lg={6} xl={6}>
+            <Card title={props.name}>
+                <p>id: {props.id}</p>
+                <p>description: {props.description}</p>
+                <p>price: {props.price}</p>
+            </Card>         
+        </Col>
     );
 }
 
 const ProductsList = () => {
     const [isLoading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
         if(isLoading) {
@@ -24,14 +31,21 @@ const ProductsList = () => {
                     setProducts(response.data);
                 })
                 .catch(
-                    error => console.error(`Error: ${error}`)
+                    error => {
+                        if(error.response.status === 401) {
+                            message.error('Access denied!', 3);
+                            history.push('/');
+                        } else {
+                            history.push('/error/' + error.response.status);
+                        }
+                    }
                 )
                 .finally(() => setLoading(false));
         }
     });
 
     return products.length ? (
-        <ul>
+        <Row gutter={[8, 8]}>
             {products.map(product => (
                 <Product
                     id={product.id}
@@ -40,9 +54,9 @@ const ProductsList = () => {
                     price={product.price}
                 />
             ))}
-        </ul>
+        </Row>
     ) : (
-    <p>loading...</p>
+    <p><Spin size="large" /> loading...</p>
     );
 }
 

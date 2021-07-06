@@ -1,10 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import { useHistory } from 'react-router-dom';
 
 import AuthService from '../services/auth.service';
+
+import { Input, Space, Button, message } from 'antd';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
+
+    useEffect(() => {
+
+    })
 
     const handleUsername = (event: any) => {
         setUsername(event.target.value);
@@ -18,7 +26,8 @@ const LoginForm = () => {
         event.preventDefault();
 
         AuthService.login(username, password).then(() => {
-            console.log(AuthService.getCurrentUser());
+            message.success('Welcome ' + username + '!', 3);
+            history.push('/products');
         }, () => {
             console.log('something went wrong!');
         });
@@ -26,17 +35,12 @@ const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <label>E-Mail</label>
-                <input onChange={handleUsername} type='text'/>
-            </div>
-            <div>
-                <label>Password</label>
-                <input onChange={handlePassword} type='password'/>
-            </div>
-            <div>
-                <button type='submit'>Submit</button>
-            </div>
+            <legend>Please Login!</legend>
+            <Space direction='vertical'>
+                <Input placeholder='Email' onChange={handleUsername}/>
+                <Input.Password placeholder='Password'onChange={handlePassword}/>
+                <Button type='primary' htmlType='submit'>Submit</Button>
+            </Space>
         </form>
     );
 }

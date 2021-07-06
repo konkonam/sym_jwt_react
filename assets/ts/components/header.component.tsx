@@ -1,24 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { PageHeader, Button, Descriptions } from 'antd';
+import { PageHeader, Button } from 'antd';
+import {CodeOutlined} from '@ant-design/icons';
+import AuthService from '../services/auth.service';
+
+const AccountControls = () => {
+    const user = AuthService.getCurrentUser();
+
+    if (user && user.email) {
+        return (
+            <>
+                <Button>
+                    <Link to="/profile">Profile</Link>
+                </Button>
+                <Button>
+                    <a href='#' onClick={AuthService.logout}>Logout</a>
+                </Button>
+            </>
+        );
+    } else {
+        return (
+            <Button>
+                <Link to="/">Login</Link>
+            </Button>
+        );
+    }
+}
 
 const Header = () => {
+    const user = AuthService.getCurrentUser();
+
     return (
-        <div className="site-page-header-ghost-wrapper">
             <PageHeader
-            ghost={false}
-            title="jwt-react"
-            extra={[
-                <Button key="3">
-                    <Link to="/">Login</Link>
-                </Button>,
-                <Button key="2">
-                    <Link to="/products">Products</Link>
-                </Button>,
-            ]}
+                className='site-page-header'
+                subTitle='a symfony-react-app'
+                ghost={false}
+                title='SYMREACT'
+                extra={[
+                    <AccountControls />,
+                    <Button>
+                        <Link to="/products">Products</Link>
+                    </Button>,
+                ]}
             >
             </PageHeader>
-        </div>
     );
 }
 
