@@ -20,7 +20,7 @@ const LoginForm = () => {
         AuthService.login(username, password).then(() => {
             console.log(AuthService.getCurrentUser());
         }, () => {
-            console.log('username or password wrong!');
+            console.log('something went wrong!');
         });
     }
 

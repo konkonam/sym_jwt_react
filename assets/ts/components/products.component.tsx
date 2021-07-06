@@ -3,28 +3,46 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '../services/api.service';
 
 const Product = (props: any) => {
-    <div>
-        id: {props.id}<br/>
-        name: {props.name}
-    </div>
+    return (
+        <li>
+            id: {props.id}<br/>
+            name: {props.name}<br/>
+            description: {props.description}<br/>
+            price: {props.price}
+        </li>
+    );
 }
 
 const ProductsList = () => {
-    const [content, setContent] = useState();
+    const [isLoading, setLoading] = useState(true);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ApiService.getProducts()
-            .then( response => {
-                setContent(response.data);
-            }, null);
+        if(isLoading) {
+            ApiService.getProducts()
+                .then( response => {
+                    setProducts(response.data);
+                })
+                .catch(
+                    error => console.error(`Error: ${error}`)
+                )
+                .finally(() => setLoading(false));
+        }
     });
-    
 
-
-    return (
-        <div>
-            {content}
-        </div>
+    return products.length ? (
+        <ul>
+            {products.map(product => (
+                <Product
+                    id={product.id}
+                    name={product.name}
+                    description={product.description}
+                    price={product.price}
+                />
+            ))}
+        </ul>
+    ) : (
+    <p>loading...</p>
     );
 }
 

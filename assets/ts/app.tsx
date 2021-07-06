@@ -1,21 +1,25 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 
-import AuthService from './services/auth.service';
+// makes regenerateRuntime a global, need to find a better solution later on
+import 'regenerator-runtime/runtime'
 
-import Count from './components/count.component';
+import Header from './components/header.component';
+
 import LoginForm from './components/login.component';
 import ProductsList from './components/products.component';
 
-const App: FunctionComponent = () => {
-    //AuthService.logout();
-
-
+const App = () => {
     return (
-        <div>
+        <Router>
+            <Header />
 
-            <ProductsList />
-        </div>
+            <Switch>
+                <Route exact path="/" component={LoginForm}/>
+                <Route exact path="/products"  component={ProductsList}/>
+            </Switch>
+        </Router>
     );
 }
 
