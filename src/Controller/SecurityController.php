@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use Firebase\JWT\JWT;
-use App\Security\RefrestTokenGenerator;
+use App\Security\RefreshTokenGenerator;
 
 use App\Repository\UserRepository;
 use App\Repository\RefreshTokenRepository;

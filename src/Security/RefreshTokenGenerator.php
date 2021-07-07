@@ -5,9 +5,9 @@ namespace App\Security;
 use App\Entity\User;
 use App\Entity\RefreshToken;
 
-class RefrestTokenGenerator
+class RefreshTokenGenerator
 {
-    private function generateRandomString()
+    private static function generateRandomString()
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -21,15 +21,14 @@ class RefrestTokenGenerator
         return $randomString;
     }
 
-    public static function generate(User $user)
+    public static function generate($entityManager, User $user)
     {
         $refreshToken = new RefreshToken();
-        $refreshToken->setToken(RefrestTokenGenerator::generate());
+        $refreshToken->setToken(RefreshTokenGenerator::generateRandomString());
         $refreshToken->setOwner($user);
         $refreshToken->setUsed(false);
         $refreshToken->setCreated(new \DateTime());
         $refreshToken->setExpires((new \DateTime())->modify('+60 min'));
-        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($refreshToken);
         $entityManager->flush();
 
