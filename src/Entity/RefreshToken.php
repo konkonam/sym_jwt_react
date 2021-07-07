@@ -18,7 +18,7 @@ class RefreshToken
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=512)
+     * @ORM\Column(type="string", length=256)
      */
     private $token;
 
@@ -32,6 +32,16 @@ class RefreshToken
      * @ORM\Column(type="boolean")
      */
     private $used;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $expires;
 
     public function getId(): ?int
     {
@@ -70,6 +80,30 @@ class RefreshToken
     public function setUsed(bool $used): self
     {
         $this->used = $used;
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getExpires(): ?\DateTimeInterface
+    {
+        return $this->expires;
+    }
+
+    public function setExpires(\DateTimeInterface $expires): self
+    {
+        $this->expires = $expires;
 
         return $this;
     }
