@@ -24,11 +24,13 @@ class RefreshTokenGenerator
     public static function generate($entityManager, User $user)
     {
         $refreshToken = new RefreshToken();
+        
         $refreshToken->setToken(RefreshTokenGenerator::generateRandomString());
         $refreshToken->setOwner($user);
         $refreshToken->setUsed(false);
         $refreshToken->setCreated(new \DateTime());
         $refreshToken->setExpires((new \DateTime())->modify('+60 min'));
+
         $entityManager->persist($refreshToken);
         $entityManager->flush();
 
