@@ -30,6 +30,7 @@ api.interceptors.response.use(
         let refreshToken = localStorage.getItem('refreshToken');
         if (refreshToken && error.response.status === UNAUTHORIZED && !originalRequest._retry) {
             originalRequest._retry = true;
+            console.log('Refreshing Access token...');
             return axios
                 .post(authUrl + 'refresh', { refresh: refreshToken })
                 .then(res => {
@@ -40,6 +41,10 @@ api.interceptors.response.use(
                         console.log('Access token refreshed!');
                         return axios(originalRequest.data);
                     }
+            }).catch(error => {
+                console.log('Could not refresh access token!');
+                window.location.href = '/login';
+                return Promise.reject(error);
             });
         }
         
