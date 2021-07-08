@@ -23,7 +23,7 @@ const ProductListElement = (props: any) => {
 }
 
 const Products = () => {
-    const [isLoading, setLoading] = useState(true);
+    const [ isLoading, setLoading ] = useState(true);
     const [ products, setProducts ] = useState([]);
 
     useEffect(() => {
@@ -46,7 +46,7 @@ const Products = () => {
             ))}
         </Row>
     ) : (
-    <p><Spin size="large" /> loading...</p>
+    <p><Spin size="large" />loading...</p>
     );
 }
 

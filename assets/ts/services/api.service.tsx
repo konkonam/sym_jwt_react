@@ -1,6 +1,6 @@
 import axios from "axios";
-import { authUrl, apiUrl, UNAUTHORIZED } from "../constants";
-
+import { history, authUrl, apiUrl, UNAUTHORIZED, NOT_FOUND } from "../constants";
+import { useHistory } from "react-router-dom";
 const api = axios.create({
   baseURL: apiUrl
 });
@@ -43,12 +43,25 @@ api.interceptors.response.use(
                     }
             }).catch(error => {
                 console.log('Could not refresh access token!');
-                window.location.href = '/login';
+                history.push('/login');
                 return Promise.reject(error);
             });
         }
         
-        // Error handling here 401 if not refresh, 404, 403, 500 etc...
+        // 401 and no refreshToken available
+        if (error.response.status === UNAUTHORIZED) {
+            history.push('/error/401');
+            return Promise.reject(error);
+        }
+
+        // 404
+        if (error.response.status === NOT_FOUND) {
+            history.push('/error/404');
+            return Promise.reject(error);
+        }
+
+        // Any other error
+        history.push('/error/' + error.response.status);
         return Promise.reject(error);
     }
 );
