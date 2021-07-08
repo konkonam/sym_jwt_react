@@ -1,11 +1,11 @@
 import axios from "axios";
-import { authUrl, apiUrl } from "../constants";
+import { authUrl, apiUrl, UNAUTHORIZED } from "../constants";
 
 const api = axios.create({
   baseURL: apiUrl
 });
 
-//request interceptor to add the auth token header to requests
+// request interceptor to add the access token header to requests
 api.interceptors.request.use(
     config => {
         const accessToken = localStorage.getItem('accessToken');
@@ -20,7 +20,7 @@ api.interceptors.request.use(
     }
 );
 
-//response interceptor to refresh token on receiving token expired error
+// response interceptor to refresh token on receiving token expired error
 api.interceptors.response.use(
     response => {
         return response;
@@ -28,7 +28,7 @@ api.interceptors.response.use(
     error => {
         const originalRequest = error.config;
         let refreshToken = localStorage.getItem('refreshToken');
-        if (refreshToken && error.response.status === 401 && !originalRequest._retry) {
+        if (refreshToken && error.response.status === UNAUTHORIZED && !originalRequest._retry) {
             originalRequest._retry = true;
             return axios
                 .post(authUrl + 'refresh', { refresh: refreshToken })
@@ -42,7 +42,8 @@ api.interceptors.response.use(
                     }
             });
         }
-
+        
+        // Error handling here 401 if not refresh, 404, 403, 500 etc...
         return Promise.reject(error);
     }
 );

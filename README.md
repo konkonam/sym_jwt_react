@@ -30,3 +30,7 @@ Access on: https://localhost:8000/ \
 Create token via:\
 `curl -L -X POST 'http://localhost:8000/auth/login?email=test@test.com&password=testpass'`\
 Then pass it to your requests in the custom header property `x-access-token`
+
+## Todo
+- Implement unit-tests
+- Cleanup backend-code
