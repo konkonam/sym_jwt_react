@@ -1,33 +1,30 @@
-import axios from 'axios';
+import axios from "axios";
+import { authUrl } from "../constants";
 
-const API_AUTH_URL = 'http://localhost:8000/auth/';
-
-class AuthService {
-    login(email: string, password: string) {
-        return axios
-            .post(API_AUTH_URL + 'login', null, { params: {
-                email,
-                password
-              }})
+const authentication = {
+    register: (email: string, password: string) => {
+        return axios.post(authUrl + 'signin', null, { params: { email, password}})
             .then(response => {
-                if(response.data.token) {
-                    localStorage.setItem('user', JSON.stringify(response.data));
-                    window.location.href = '/products';
-                }   
+                localStorage.setItem('email', response.data.email);
+                localStorage.setItem('accessToken', response.data.accessToken);
+                localStorage.setItem('refreshToken', response.data.refreshToken);
+            });
+    },
 
-                return response.data;
-            })
-    }
+    login: (email: string, password: string) => {
+        return axios.post(authUrl + 'login', null, { params: { email, password } })
+            .then(response => {
+                localStorage.setItem('email', response.data.email);
+                localStorage.setItem('accessToken', response.data.accessToken);
+                localStorage.setItem('refreshToken', response.data.refreshToken);
+            });
+    },
 
-    logout() {
-        localStorage.removeItem('user');
-        document.cookie = 'PHPSESSID =; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        window.location.href = '/';
-    }
+    logout: () => {
+        localStorage.removeItem('email');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+    },
+};
 
-    getCurrentUser() {
-        return JSON.parse(localStorage.getItem('user'));;
-    }
-}
-
-export default new AuthService();
+export default authentication;
