@@ -6,6 +6,7 @@ import { history } from './constants';
 import Header from './components/header.component';
 
 import LoginForm from './components/login.component';
+import RegisterPage from './layouts/register.layout';
 import Products from './components/products.component';
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <div className='container'>
         <Switch>
           <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/products" component={Products} />
           <Route exact path='/products/:id'/>
         </Switch>

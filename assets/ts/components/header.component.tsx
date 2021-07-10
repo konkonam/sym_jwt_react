@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PageHeader, Button, message } from 'antd';
+import { PageHeader, Menu, Button, message } from 'antd';
 
 import authentication from '../services/auth.service';
+import Navigation from './navigation.component';
 
 const Controls = () => {
     const [ isAuthenticated, setAuthenticated ] = useState(false);
@@ -21,6 +22,9 @@ const Controls = () => {
             <Button type='primary'>
                 <Link to='/login'>Login</Link>
             </Button>
+            <Button type='primary'>
+                <Link to='/register'>Register</Link>
+            </Button>
             <Button type='primary' onClick={handleLogout} danger>Logout</Button>
         </>
     ) : (
@@ -30,6 +34,9 @@ const Controls = () => {
             </Button>
             <Button type='primary'>
                 <Link to='/login'>Login</Link>
+            </Button>
+            <Button type='primary'>
+                <Link to='/register'>Register</Link>
             </Button>
             <Button type='primary' onClick={handleLogout} danger>Logout</Button>
         </>
@@ -47,7 +54,11 @@ const Header = () => {
             subTitle="a minimalistic store"
             avatar={{ src: 'http://localhost:8000/static/logo.png' }}
             extra={[<Controls />]}
-        />
+        >
+
+            <Navigation/>
+
+        </PageHeader>
     );
 }
 

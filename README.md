@@ -34,3 +34,4 @@ Then pass it to your requests in the custom header property `x-access-token`
 ## Todo
 - Implement unit-tests
 - Cleanup backend-code
+- Disable refresh-tokens for the requesting user if new key is generated so that we only have one valid key at a time for each user

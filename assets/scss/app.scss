@@ -6,13 +6,23 @@
     display: flex;
 }
 
-#loginForm {
+.ant-form {
+    // max-width: 300px;
+    // margin: 0 auto;
     width: 100%;
-    max-width: 300px;
+
+    legend {
+        padding-bottom: 10px;
+        text-align: center;
+    }
+}
+
+.center-block {
+    display: block;
     margin: 0 auto;
 }
 
 .container {
-    padding-left: 24px;
     padding-right: 24px;
+    padding-left: 24px;
 }

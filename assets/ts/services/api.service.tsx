@@ -1,5 +1,6 @@
 import axios from "axios";
 import { history, authUrl, apiUrl, UNAUTHORIZED, NOT_FOUND } from "../constants";
+import { message } from "antd";
 
 const api = axios.create({
   baseURL: apiUrl
@@ -50,6 +51,7 @@ api.interceptors.response.use(
         
         // 401 and no refreshToken available
         if (error.response.status === UNAUTHORIZED) {
+            message.error('Access denied!')
             history.push('/login');
             return Promise.reject(error);
         }
