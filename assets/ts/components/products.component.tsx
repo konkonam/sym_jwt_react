@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Row, Col, Card, message, Spin } from 'antd';
+import { Row, Col, Card, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import api from '../services/api.service';
 
 const { Meta } = Card;
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const ProductListElement = (props: any) => {
     const history = useHistory();
@@ -17,7 +19,7 @@ const ProductListElement = (props: any) => {
             <Card cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"/>} hoverable onClick={handleClick}>
             <Meta title={props.name} description={props.description}/>
                 <p>{props.price}$</p>
-            </Card>         
+            </Card> 
         </Col>
     );
 }
@@ -46,7 +48,7 @@ const Products = () => {
             ))}
         </Row>
     ) : (
-    <p><Spin size="large" />loading...</p>
+    <p><Spin indicator={antIcon} /> loading...</p>
     );
 }
 

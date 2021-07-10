@@ -1,6 +1,6 @@
 import axios from "axios";
 import { history, authUrl, apiUrl, UNAUTHORIZED, NOT_FOUND } from "../constants";
-import { useHistory } from "react-router-dom";
+
 const api = axios.create({
   baseURL: apiUrl
 });
@@ -50,7 +50,7 @@ api.interceptors.response.use(
         
         // 401 and no refreshToken available
         if (error.response.status === UNAUTHORIZED) {
-            history.push('/error/401');
+            history.push('/login');
             return Promise.reject(error);
         }
 

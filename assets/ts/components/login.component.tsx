@@ -6,21 +6,21 @@ import { Form, Input, Button, Checkbox, message } from 'antd';
 const LoginForm = () => {
     const history = useHistory();
 
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-    authentication.login(values.email, values.password).then(() => {
-        message.success('Welcome ' + values.email);
-        history.push('/products');
-    });
-  };
+    const onFinish = (values: any) => {
+        authentication.login(values.email, values.password).then(() => {
+            message.success('Welcome ' + values.email);
+            history.push('/products');
+        });
+    };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+    const onFinishFailed = (errorInfo: any) => {
+        message.error('Could not login!');
+    };
 
   return (
     <Form
-      name="basic"
+      name="loginForm"
+      layout='vertical'
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       initialValues={{ remember: true }}
@@ -47,7 +47,7 @@ const LoginForm = () => {
         <Checkbox>Remember me</Checkbox>
       </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+      <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>

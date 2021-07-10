@@ -12,11 +12,14 @@ const App = () => {
   return (
     <Router history={history}>
       <Header />
-      <Switch>
-        <Route exact path="/products" component={Products} />
-        <Route exact path="/login" component={LoginForm} />
-        <Route exact path="/logout" />
-      </Switch>
+
+      <div className='container'>
+        <Switch>
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/products" component={Products} />
+          <Route exact path='/products/:id'/>
+        </Switch>
+      </div>
     </Router>
   );
 }

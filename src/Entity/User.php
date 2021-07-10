@@ -43,6 +43,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $refreshTokens;
 
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $prename;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $surname;
+
+    /**
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=16)
+     */
+    private $postalCode;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->refreshTokens = new ArrayCollection();
@@ -163,6 +193,78 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $refreshToken->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPrename(): ?string
+    {
+        return $this->prename;
+    }
+
+    public function setPrename(string $prename): self
+    {
+        $this->prename = $prename;
+
+        return $this;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(string $surname): self
+    {
+        $this->surname = $surname;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(string $postalCode): self
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

@@ -1,24 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PageHeader, Button } from 'antd';
+import { PageHeader, Button, message } from 'antd';
 
 import authentication from '../services/auth.service';
 
 const Controls = () => {
+    const [ isAuthenticated, setAuthenticated ] = useState(false);
     const email = localStorage.getItem('email');
 
     const handleLogout = () => {
         authentication.logout();
+        message.error('Bye!');
     }
 
     return email ? (
         <>
             <Button type='primary'>
+                <Link to='/products'>Products</Link>
+            </Button>
+            <Button type='primary'>
                 <Link to='/login'>Login</Link>
             </Button>
+            <Button type='primary' onClick={handleLogout} danger>Logout</Button>
         </>
     ) : (
         <>
+            <Button type='primary'>
+                <Link to='/products'>Products</Link>
+            </Button>
+            <Button type='primary'>
+                <Link to='/login'>Login</Link>
+            </Button>
             <Button type='primary' onClick={handleLogout} danger>Logout</Button>
         </>
     );
